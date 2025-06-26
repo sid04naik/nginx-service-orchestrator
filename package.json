@@ -1,0 +1,22 @@
+{
+  "name": "nginx-service-orchestrator",
+  "version": "1.0.1",
+  "main": "index.js",
+  "type": "commonjs",
+  "description": "This repository is a dynamic NGINX reverse proxy and service gateway generator for a microservices environment",
+  "engines": {
+    "node": "22"
+  },
+  "keywords": [
+    "proxy",
+    "nginx-proxy"
+  ],
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Siddhant Naik",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
