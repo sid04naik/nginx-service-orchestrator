@@ -1,8 +1,72 @@
 http:
-  - host: 'host.docker.internal'
+  - host: "host.docker.internal"
     api:
-      v1:
-        - service1:
+      v3:
+        - jwt:
+            port: 8051
+        - notebook:
+            port: 8052
+        - acl:
+            port: 9001
+        - static:
+            port: 9002
+        - async:
+            port: 9003
+        - sync:
+            port: 9004
+        - views:
             port: 9011
-        - service2:
+        - personalization:
             port: 9012
+        - teams:
+            port: 9013
+        - notes:
+            port: 9014
+        - datatemplates:
+            port: 9015
+        - propertydata:
+            port: 9016
+        - tasks:
+            port: 9017
+        - lots:
+            port: 9018
+        - inventories:
+            port: 9019
+        - cas:
+            port: 9020
+        - lists:
+            port: 9021
+        - projects:
+            port: 9022
+        - users:
+            port: 9023
+        - attachments:
+            port: 9024
+        - template:
+            port: 9025
+        - reports:
+            port: 9026
+        - companies:
+            port: 9027
+        - schedules:
+            port: 9028
+        - entitystatus:
+            port: 9029
+        - customfields:
+            port: 9030
+        - instructions:
+            port: 9031
+        - localizations:
+            port: 9032
+        - datacolumns:
+            port: 9033
+        - parametergroups:
+            port: 9034
+        - parameters:
+            port: 9035
+        - workflow:
+            port: 9036
+        - customtemplates:
+            port: 9037
+        - lstsearchfields:
+            port: 9038
