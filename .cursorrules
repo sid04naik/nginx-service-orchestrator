@@ -1,0 +1,140 @@
+# NGINX Service Orchestrator - Project Intelligence
+
+## Project Overview
+This is a dynamic NGINX reverse proxy and service gateway generator for microservices environments. The project uses Node.js to generate NGINX configurations from YAML service definitions and deploys them using Docker Compose.
+
+## Critical Implementation Patterns
+
+### 1. Configuration-Driven Architecture
+- **Pattern**: YAML → Node.js Processing → NGINX Config → Runtime
+- **Key Insight**: All system behavior is derived from `services.yml` configuration
+- **Implementation**: `index.js` reads YAML, generates NGINX config, writes to file system
+
+### 2. Container Orchestration Pattern
+- **Pattern**: Node.js (Config Generator) → NGINX (Runtime Proxy)
+- **Key Insight**: Two-stage deployment: generate config first, then start proxy
+- **Implementation**: Docker Compose with dependency management
+
+### 3. Service Routing Pattern
+- **Pattern**: `/api/{version}/{service}` → `http://{host}:{port}`
+- **Key Insight**: Consistent URL structure enables predictable routing
+- **Implementation**: Dynamic location block generation in NGINX config
+
+## User Preferences and Workflow
+
+### Development Workflow
+1. **Edit Configuration**: Update `services.yml` with new service definitions
+2. **Regenerate**: Run `docker-compose up` to regenerate NGINX config
+3. **Deploy**: NGINX automatically starts with new configuration
+4. **Test**: Verify routing works for new services
+
+### Configuration Management
+- **YAML Structure**: Hierarchical with http → host → api → version → service → port
+- **Validation**: Currently minimal - relies on YAML syntax validation only
+- **Updates**: Require container restart for configuration changes
+
+### Error Handling Preferences
+- **Fail Fast**: Exit on YAML parsing errors with clear error messages
+- **Graceful Degradation**: Continue operation with partial configuration
+- **Logging**: Console output for orchestrator, file logging for NGINX
+
+## Project-Specific Patterns
+
+### File Organization
+- **Configuration**: `services.yml` (input), `nginx.conf` (output)
+- **Code**: `index.js` (single file orchestrator)
+- **Deployment**: `docker-compose.yml` (container orchestration)
+- **Documentation**: `memory-bank/` (comprehensive project docs)
+
+### Code Patterns
+- **Functional Style**: Pure functions for configuration processing
+- **Error Handling**: Try-catch with process.exit for critical errors
+- **File I/O**: Synchronous operations for simplicity
+- **Template Generation**: Array-based config building with join
+
+### Docker Patterns
+- **Volume Mounting**: Share configuration and logs between containers
+- **Dependency Chain**: NGINX waits for Node.js completion
+- **Network**: Bridge network for inter-container communication
+- **Restart Policy**: NGINX with restart always
+
+## Known Challenges and Solutions
+
+### Configuration Validation
+- **Challenge**: No schema validation for YAML configuration
+- **Solution**: Add YAML schema validation with clear error messages
+- **Priority**: High - prevents runtime errors
+
+### Static Configuration
+- **Challenge**: Changes require container restart
+- **Solution**: Implement dynamic configuration reloading
+- **Priority**: Medium - improves developer experience
+
+### Host Resolution
+- **Challenge**: Relies on `host.docker.internal` which may not work everywhere
+- **Solution**: Environment-specific host resolution configuration
+- **Priority**: Medium - affects deployment flexibility
+
+### Monitoring
+- **Challenge**: Limited observability and health checks
+- **Solution**: Add health check endpoints and structured logging
+- **Priority**: Medium - important for production readiness
+
+## Evolution of Project Decisions
+
+### Technology Choices
+- **Node.js 22**: Chosen for fast file I/O and YAML parsing capabilities
+- **js-yaml**: Selected for reliable YAML parsing with good error handling
+- **NGINX Alpine**: Lightweight container image for reverse proxy
+- **Docker Compose**: Simple orchestration for development and deployment
+
+### Architecture Decisions
+- **Static Generation**: Chosen over dynamic configuration for simplicity and performance
+- **Single File Orchestrator**: Keeps code simple and focused
+- **Volume Mounting**: Enables configuration sharing between containers
+- **Bridge Network**: Provides isolation while allowing inter-container communication
+
+## Tool Usage Patterns
+
+### Development Tools
+- **Node.js**: Runtime for configuration generation
+- **Docker**: Containerization and deployment
+- **Docker Compose**: Multi-container orchestration
+- **YAML**: Configuration format
+
+### Testing Approach
+- **Current**: Manual testing of configuration generation and routing
+- **Future**: Unit tests for core functions, integration tests for deployment
+- **Tools**: Jest for unit testing, Docker Compose for integration testing
+
+### Deployment Strategy
+- **Local**: Docker Compose for development and testing
+- **Production**: Docker Compose with environment-specific configurations
+- **Scaling**: Horizontal scaling with load balancer (future enhancement)
+
+## Quality Standards
+
+### Code Quality
+- **Simplicity**: Prefer simple, readable code over complex abstractions
+- **Error Handling**: Comprehensive error handling with clear messages
+- **Documentation**: Inline comments for complex logic
+- **Consistency**: Follow established patterns and conventions
+
+### Configuration Quality
+- **Validation**: Validate all configuration inputs
+- **Documentation**: Clear documentation of configuration options
+- **Examples**: Provide working examples for common use cases
+- **Error Messages**: Helpful error messages for configuration issues
+
+### Deployment Quality
+- **Reliability**: Ensure consistent deployment behavior
+- **Observability**: Comprehensive logging and monitoring
+- **Security**: Follow security best practices
+- **Performance**: Optimize for fast startup and low resource usage
+
+## New Code Block
+
+### Configuration Validation
+- **Challenge**: No schema validation for YAML configuration
+- **Solution**: Add YAML schema validation with clear error messages
+- **Priority**: High - prevents runtime errors
