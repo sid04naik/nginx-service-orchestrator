@@ -70,3 +70,5 @@ http:
             port: 9037
         - lstsearchfields:
             port: 9038
+        - activities:
+            port: 9039
