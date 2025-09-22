@@ -76,3 +76,5 @@ http:
             port: 9040
         - csvtables:
             port: 9041
+        - csvtables:
+            port: 9042
