@@ -76,5 +76,7 @@ http:
             port: 9040
         - csvtables:
             port: 9041
-        - csvtables:
+        - witnesses:
             port: 9042
+        - login:
+            port: 9043
