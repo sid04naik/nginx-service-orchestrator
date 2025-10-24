@@ -80,3 +80,9 @@ http:
             port: 9042
         - login:
             port: 9043
+        - links:
+            port: 9044
+        - batchdata:
+            port: 9045
+        - pricings:
+            port: 9046
