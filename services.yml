@@ -88,3 +88,5 @@ http:
             port: 9046
         - referenceattributes:
             port: 9047
+        - resultgridsync:
+            port: 9048
